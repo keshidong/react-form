@@ -6,9 +6,10 @@ class Subscription {
         this.listeners.push(listener);
     }
     notify() {
-        this.listeners.forEach((listener) => {
-            listener();
-        });
+        return this.listeners.some(listener => (listener()));
+        // this.listeners.forEach((listener) => {
+        //     listener();
+        // });
     }
     clear() {
         this.listeners = null;

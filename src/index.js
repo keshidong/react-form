@@ -9,6 +9,10 @@ class Form extends Component {
 
         this.formStore = context.formStore;
 
+        props.exposeMethods({
+            launchValidate: this.launchValidate.bind(this),
+        });
+
         this.subFormStore = new Subscription();
     }
 
@@ -19,9 +23,7 @@ class Form extends Component {
     componentDidMount() {
         if (this.formStore) {
             // 父级元素订阅
-            this.formStore.subscribe(() => {
-                this.subFormStore.notify();
-            });
+            this.formStore.subscribe(() => (this.subFormStore.notify()));
         }
         // 订阅
         this.subFormStore.subscribe(this.props.onValidate);
@@ -33,7 +35,8 @@ class Form extends Component {
 
     // 触发校验
     launchValidate() {
-        this.subFormStore.notify();
+        // 返回true表示不通过校验
+        return this.subFormStore.notify();
     }
 
     render() {
@@ -49,12 +52,14 @@ Form.propTypes = {
     onValidate: PropTypes.func,
     children: PropTypes.node,
     className: PropTypes.string,
+    exposeMethods: PropTypes.func,
 };
 
 Form.defaultProps = {
     onValidate: () => {},
     children: null,
     className: '',
+    exposeMethods: () => {},
 };
 
 Form.childContextTypes = {
