@@ -1,12 +1,14 @@
 class Subscription {
-    constructor() {
+    constructor(handleListeners) {
         this.listeners = [];
+        this.handleListeners = handleListeners;
     }
     subscribe(listener) {
         this.listeners.push(listener);
     }
     notify() {
-        return this.listeners.some(listener => (listener()));
+        return this.handleListeners(this.listeners);
+
         // this.listeners.forEach((listener) => {
         //     listener();
         // });
