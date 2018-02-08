@@ -15,6 +15,7 @@
 ## 为组件注册校验函数onValidate 和 注册数据获取函数 setValue
 只有注册onValidate 和 setValue 才能被上层组件执行。
 
-## 值得注意的是
+## 值得注意的是：
 只要注册了onValidate，校验就不会再通知下层组件。
+
 只要注册了setValue，获取数据就不会再去组织获取下层组件的表单数据。
