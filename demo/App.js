@@ -8,14 +8,12 @@ class App extends Component {
     }
     handleClick() {
         this.form1.launchValidate();
+        console.log(this.form1.getValue());
     }
     render() {
         return (
             <Form
                 name="form1"
-                onValidate={() => {
-                    console.log(11);
-                }}
                 ref={(r) => {
                     this.form1 = r;
                 }}
@@ -29,6 +27,9 @@ class App extends Component {
                         onValidate={() => {
                             console.log(21);
                         }}
+                        setValue={() => {
+                            return 21;
+                        }}
                     >
                         <div>2</div>
                         <div>3</div>
@@ -38,11 +39,17 @@ class App extends Component {
                         onValidate={() => {
                             console.log(22);
                         }}
+                        // setValue={() => {
+                        //     return 22;
+                        // }}
                     >
                         <Form
                             name="form3"
                             onValidate={() => {
                                 console.log(3);
+                            }}
+                            setValue={() => {
+                                return 3;
                             }}
                         >3</Form>
                     </Form>
